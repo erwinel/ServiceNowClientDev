@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module":"none",
+        "noImplicitAny": true,
+        "removeComments": false,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "declaration": true,
+        "outDir": "compiled",
+        "lib": [
+            "es2015"
+        ]
+    },
+    "files": [
+        "src/test.ts",
+        "src/x_44813_util/types.ts"
+    ]
+}

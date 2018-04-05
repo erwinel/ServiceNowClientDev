@@ -1,0 +1,30 @@
+{
+  "name": "servicenowcode",
+  "version": "1.0.0",
+  "description": "TypeScript sources for ServiceNow Client Scripting",
+  "main": "compiled/test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+hhttps://github.com/erwinel/ServiceNowClientDev.git"
+  },
+  "author": "Leonard T. Erwine",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/erwinel/ServiceNowClientDev/issues"
+  },
+  "homepage": "https://github.com/erwinel/ServiceNowClientDev#readme",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "bootstrap": "^4.0.0",
+    "bootstrap-table": "^1.11.2",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1"
+  }
+}

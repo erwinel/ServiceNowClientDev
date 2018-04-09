@@ -1,20 +1,24 @@
 ServiceNow Client Development
 =============================
+
 This contains files, scripts and documentation for customizing and maintaining ServiceNow.
 
 Dev Environment Setup
 ---------------------
+
 This solution was developed using Visual Studio Code.
 
-The npm package manager node.js (https://nodejs.org) and (VS Code extension eg2.vscode-npm-script) is required for building and package maintenance.
+The npm package manager (https://npmjs.com) and (VS Code extension eg2.vscode-npm-script) is required for building and package maintenance.
 
 Microsoft PowerShell 5.0 or better may be required for development.
 
 Additionally, the following npm packages most likely need to be installed globally:
 
 - eslint
+- tslint
+- jshint
+- typescript
 - gulp
-- mocha
 
 Use the command "npm update" to install required local packages.
 

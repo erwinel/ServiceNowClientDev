@@ -5,8 +5,8 @@
         "noImplicitAny": true,
         "removeComments": false,
         "preserveConstEnums": true,
-        "sourceMap": true,
-        "declaration": true,
+        "sourceMap": false,
+        "declaration": false,
         "outDir": "compiled",
         "lib": [
             "es2015"
@@ -14,6 +14,6 @@
     },
     "files": [
         "src/test.ts",
-        "src/x_44813_util/types.ts"
+        "src/util/types.ts"
     ]
 }

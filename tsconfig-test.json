@@ -5,18 +5,15 @@
         "noImplicitAny": true,
         "removeComments": false,
         "preserveConstEnums": true,
-        "sourceMap": true,
-        "declaration": true,
-        "outDir": "compiled",
+        "sourceMap": false,
+        "declaration": false,
+        "outDir": "./test",
         "lib": [
             "es2015",
             "dom"
         ]
     },
     "include": [
-        "./src/**/*.ts"
-    ],
-    "exclude": [
         "./src/**/test-*.ts",
         "./src/**/testLib.ts"
     ]

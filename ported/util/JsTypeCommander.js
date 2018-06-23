@@ -24,7 +24,6 @@ var JsTypeCommander = (function (JsTypeCommander) {
             abnormalWhitespace: patternDefaults.regex.abnormalWhitespace
         }
     };
-    ;
     /**
      * Gets the default character sequence that will be used when joining lines of text.
      * @returns {string} The default character sequence that will be used when joining lines of text.

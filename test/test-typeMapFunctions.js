@@ -430,7 +430,7 @@ describe("Testing type map functions", function () {
                         var omit = (typeof (opt.omit) == "undefined") ? [] : ((typeof (opt.omit) == "string") ? [opt.omit] : opt.omit);
                         args.forEach(function (argInfo) {
                             var tgh = new MapByTypeHelper(omit);
-                            it('JsTypeCommander.mapByTypeValue(' + argInfo.display + ', ' + JSON.stringify(tgh.toJSON()) + ((typeof (opt.checkElements) == "boolean") ? ", " +
+                            it('x_44813_util.JsTypeCommander.mapByTypeValue(' + argInfo.display + ', ' + JSON.stringify(tgh.toJSON()) + ((typeof (opt.checkElements) == "boolean") ? ", " +
                                 opt.checkElements : "") + ') should return ' + opt.expected + " (calling " + mapCallbackIdToName(opt.expected) + ")", function () {
                                 var result = (typeof (opt.checkElements) == "boolean") ?
                                     JsTypeCommander_1.x_44813_util.JsTypeCommander.mapByTypeValue.call(this, argInfo.getValue(), tgh, opt.checkElements) :
@@ -484,5 +484,137 @@ describe("Testing type map functions", function () {
         });
     }, this);
 });
-describe("Testing function mapInto(obj: any, callbackfn: RecursiveMapCallbackFn, options?: MapIntoOptions): any", function () {
+describe("Testing function mapInto(obj: any, callbackFn: RecursiveMapCallbackFn, options?: MapIntoOptions): any", function () {
+    var sourceNumber = 7;
+    var expectedNumber = sourceNumber / 2;
+    it("JsTypeCommander.mapInto(" + sourceNumber + ", (current, key, source, target) => current / 2)) should return " + expectedNumber, function () {
+        var callbackFn = function (current, key, source, target) {
+            return current / 2;
+        };
+        var actual = JsTypeCommander_1.x_44813_util.JsTypeCommander.mapInto(sourceNumber, callbackFn);
+        expect(typeof (actual)).toBe("number");
+        expect(actual).toBe(expectedNumber);
+    });
+    var sourceArray1 = [true, "2", 3];
+    var expectedArray1 = ["true", "2", "3"];
+    it("JsTypeCommander.mapInto(" + JSON.stringify(sourceArray1) + ", (current, key, source, target): any)) should return" + JSON.stringify(expectedArray1), function () {
+        var callbackFn = function (current, key, source, target) {
+            if (JsTypeCommander_1.x_44813_util.JsTypeCommander.notDefined(source))
+                return [];
+            return current.toString();
+        };
+        var actual = JsTypeCommander_1.x_44813_util.JsTypeCommander.mapInto(sourceArray1, callbackFn);
+        expect(typeof (actual)).toBe("object");
+        expect(Array.isArray(actual)).toBe(true, "Result value is not an array");
+        if (Array.isArray(actual)) {
+            expect(actual.length).toBe(expectedArray1.length, "length mismatch");
+            for (var i = 0; i < expectedArray1.length; i++) {
+                expect(typeof (actual[i])).toBe("string", "Element " + i + " type mismatch");
+                expect(actual[i]).toBe(expectedArray1[i], "Element " + i + " value mismatch");
+            }
+        }
+    });
+    var myThisObj = { count: 0, count2: 0 };
+    var sourceOpts1 = {
+        thisObj: myThisObj,
+        totalMaxItems: 6
+    };
+    var sourceArray2 = [undefined, null, true, false, 0, "test", 5.6];
+    var expectedArray2 = ["undefined", "null", "true", "false", "0", "\"test\""];
+    it("JsTypeCommander.mapInto(" + (sourceArray2.map(function (i) {
+        if (JsTypeCommander_1.x_44813_util.JsTypeCommander.notDefined(i))
+            return "undefined";
+        if (JsTypeCommander_1.x_44813_util.JsTypeCommander.isNull(i))
+            return "null";
+        return JSON.stringify(i);
+    })) + ", (current, key, source, target): any, " + JSON.stringify(sourceOpts1) + ")) should return" + JSON.stringify(expectedArray2) + " and thisObj.count should be " + expectedArray2.length + 1, function () {
+        var callbackFn = function (current, key, source, target) {
+            this.count++;
+            if (JsTypeCommander_1.x_44813_util.JsTypeCommander.notDefined(source))
+                return [];
+            if (JsTypeCommander_1.x_44813_util.JsTypeCommander.notDefined(current))
+                return "undefined";
+            if (JsTypeCommander_1.x_44813_util.JsTypeCommander.isNull(current))
+                return "null";
+            return JSON.stringify(current);
+        };
+        myThisObj.count = 0;
+        myThisObj.count2 = 0;
+        var actual = JsTypeCommander_1.x_44813_util.JsTypeCommander.mapInto(sourceArray2, callbackFn, sourceOpts1);
+        expect(typeof (actual)).toBe("object");
+        expect(Array.isArray(actual)).toBe(true, "Result value is not an array");
+        if (Array.isArray(actual)) {
+            if (actual.length != expectedArray2.length) {
+                expect(actual).toBe(expectedArray2);
+                expect(actual.length).toBe(expectedArray2.length, "length mismatch");
+            }
+            for (var i = 0; i < expectedArray2.length; i++) {
+                expect(typeof (actual[i])).toBe("string", "Element " + i + " type mismatch in ");
+                expect(actual[i]).toBe(expectedArray2[i], "Element " + i + " value mismatch");
+            }
+        }
+        expect(myThisObj.count).toBe(expectedArray2.length + 1);
+    });
+    var sourceArray3 = [{ a: 1, b: 2 }, 3, 4, ["Eins", "Svein", "Drei"]];
+    var expectedArray3 = [{ count: 2, a: 1, b: 2 }, 3, 4, ["Eins", "Svein", "Drei"]];
+    myThisObj.count = 0;
+    myThisObj.count2 = 0;
+    var sourceOpts2 = { thisObj: myThisObj };
+    it("JsTypeCommander.mapInto(" + JSON.stringify(sourceArray3) + ", (current, key, source, target): any, " + JSON.stringify(sourceOpts2) + ")) should return " + JSON.stringify(expectedArray3) + " and thisObj.count should be 10", function () {
+        var callbackFn = function (current, key, source, target) {
+            this.count++;
+            if (JsTypeCommander_1.x_44813_util.JsTypeCommander.notDefined(source) || Array.isArray(current))
+                return [];
+            return (JsTypeCommander_1.x_44813_util.JsTypeCommander.isObject(current)) ? { count: this.count } : current;
+        };
+        myThisObj.count = 0;
+        myThisObj.count2 = 0;
+        var actual = JsTypeCommander_1.x_44813_util.JsTypeCommander.mapInto(sourceArray3, callbackFn, sourceOpts2);
+        (sourceArray3[0])["a"] = 5;
+        (sourceArray3[0])["b"] = 5;
+        sourceArray3[1] = 5;
+        sourceArray3[2] = 5;
+        sourceArray3[3][0] = "5";
+        sourceArray3[3][1] = "5";
+        sourceArray3[3][2] = "5";
+        expect(typeof (actual)).toBe("object");
+        expect(Array.isArray(actual)).toBe(true, "Result value is not an array");
+        if (Array.isArray(actual)) {
+            expect(actual.length).toBe(expectedArray3.length, "length mismatch");
+            var obj = actual[0];
+            expect(JsTypeCommander_1.x_44813_util.JsTypeCommander.isNonArrayObject(obj)).toBe(true, "Element 0 is not a non-array object");
+            if (JsTypeCommander_1.x_44813_util.JsTypeCommander.isNonArrayObject(obj)) {
+                var e0 = (expectedArray3[0]);
+                expect(typeof (obj["a"])).toBe("number", "actual[0].a is not a number");
+                expect(obj["a"]).toBe(e0["a"], "actual[0].a value mismatch");
+                expect(typeof (obj["b"])).toBe("number", "actual[0].b is not a number");
+                expect(obj["b"]).toBe(e0["b"], "actual[0].b value mismatch");
+                expect(typeof (obj["count"])).toBe("number", "actual[0].count is not a number");
+            }
+            obj = actual[1];
+            expect(JsTypeCommander_1.x_44813_util.JsTypeCommander.isNumber(obj)).toBe(true, "Element 1 is not a number");
+            if (JsTypeCommander_1.x_44813_util.JsTypeCommander.isNumber(obj)) {
+                expect(typeof (obj)).toBe("number", "actual[1] is not a number");
+                expect(obj).toBe(expectedArray3[1], "actual[1] value mismatch");
+            }
+            obj = actual[2];
+            expect(JsTypeCommander_1.x_44813_util.JsTypeCommander.isNumber(obj)).toBe(true, "Element 2 is not a number");
+            if (JsTypeCommander_1.x_44813_util.JsTypeCommander.isNumber(obj)) {
+                expect(typeof (obj)).toBe("number", "actual[2] is not a number");
+                expect(obj).toBe(expectedArray3[2], "actual[2] value mismatch");
+            }
+            obj = actual[3];
+            expect(typeof (obj)).toBe("object", "Element 3 is not an array");
+            expect(Array.isArray(obj)).toBe(true, "Element 3 is not an array");
+            if (Array.isArray(obj)) {
+                var arr = (expectedArray3[3]);
+                expect(obj.length).toBe(arr.length);
+                for (var i = 0; i < arr.length; i++) {
+                    expect(typeof (obj[i])).toBe("string", "actual[3][" + i + "] is not a string");
+                    expect(obj[i]).toBe(arr[i], "actual[3][" + i + "] value mismatch");
+                }
+            }
+        }
+        expect(myThisObj.count).toBe(10, "thisObj.count failed");
+    });
 });

@@ -44,6 +44,6 @@ gulp.task('buildAll', ['buildUtil', 'buildTest']);
 gulp.task('rebuildAll', ['rebuildUtil', 'rebuildTest']);
 
 gulp.task('runTests', function() {
-    return gulp.src(['test/test-*.js'])
+    return gulp.src(['test/**/+(test.js|test-)*.js'])
       .pipe(jasmine());
 });

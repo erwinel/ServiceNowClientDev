@@ -45,7 +45,7 @@ export class TestErrorLike2 extends TestErrorLike {
     number: number = 12;
     get name(): string { return "TestErrorLike2"; }
 }
-export class TestErrorLike3 extends TestErrorLike2 implements x_44813_util.ErrorLike {
+export class TestErrorLike3 extends TestErrorLike2 implements x_44813_util.JsTypeCommander.ErrorLike {
     description?: string;
     fileName?: string;
     lineNumber?: number;

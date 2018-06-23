@@ -3,41 +3,36 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var JsTypeCommander_1 = require("../compiled/JsTypeCommander");
 describe("Testing module options settings", function () {
     describe("Testing JsTypeCommander.getDefaultLineSeparatorSequence()", function () {
+        JsTypeCommander_1.x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence();
         it('JsTypeCommander.getDefaultLineSeparatorSequence() should return "\\n"', function () {
             var result = JsTypeCommander_1.x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
-            expect(result).toBeDefined();
+            expect(typeof (result)).toBe('string', "result is not a string");
             expect(result).toBe("\n");
         });
     });
     describe("Testing JsTypeCommander.setDefaultLineSeparatorSequence()", function () {
-        it('JsTypeCommander.setDefaultLineSeparatorSequence("\\r\\n") should return "\\r\\n"', function () {
+        it('JsTypeCommander.setDefaultLineSeparatorSequence("\\r\\n") should return "\\r\\n", then getDefaultLineSeparatorSequence() should return "\\r\\n"', function () {
             var result = JsTypeCommander_1.x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence("\r\n");
-            expect(result).toBeDefined();
+            expect(typeof (result)).toBe('string', "result is not a string");
             expect(result).toBe("\r\n");
+            result = JsTypeCommander_1.x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
+            expect(typeof (result)).toBe('string', "validation is not a string");
+            expect(result).toBe("\r\n", "Validation failed");
         });
-        it('JsTypeCommander.getDefaultLineSeparatorSequence() should return "\\r\\n"', function () {
-            JsTypeCommander_1.x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence("\r\n");
-            var result = JsTypeCommander_1.x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
-            expect(result).toBeDefined();
-            expect(result).toBe("\r\n");
-        });
-        it('JsTypeCommander.setDefaultLineSeparatorSequence() should return "\\n"', function () {
+        it('JsTypeCommander.setDefaultLineSeparatorSequence() should return "\\n", then getDefaultLineSeparatorSequence() should return "\\n"', function () {
             var result = JsTypeCommander_1.x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence();
-            expect(result).toBeDefined();
+            expect(typeof (result)).toBe('string', "result is not a string");
             expect(result).toBe("\n");
-        });
-        it('JsTypeCommander.getDefaultLineSeparatorSequence() should return "\\n"', function () {
-            JsTypeCommander_1.x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence();
-            var result = JsTypeCommander_1.x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
-            expect(result).toBeDefined();
-            expect(result).toBe("\n");
+            result = JsTypeCommander_1.x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
+            expect(typeof (result)).toBe('string', "validation is not a string");
+            expect(result).toBe("\n", "Validation failed");
         });
     });
     describe("Testing JsTypeCommander.getPatternOptions()", function () {
         it('JsTypeCommander.getPatternOptions() should not return nil', function () {
             var regexOptionResult = JsTypeCommander_1.x_44813_util.JsTypeCommander.getPatternOptions();
             expect(regexOptionResult).toBeDefined();
-            expect(regexOptionResult).not.toBeNull();
+            expect(regexOptionResult).not.toBe(null);
         });
     });
     describe("Checking JsTypeCommander.getPatternOptions() properties", function () {
@@ -51,58 +46,44 @@ describe("Testing module options settings", function () {
         it('onlyWhitespace property should be defined', function () {
             if (typeof (regexOptionResult) == "undefined")
                 this.skip();
-            else {
+            else
                 expect(regexOptionResult.onlyWhitespace).toBeDefined();
-                expect(regexOptionResult.onlyWhitespace).not.toBeNull();
-            }
         });
         it('trimStart property should be defined', function () {
             if (typeof (regexOptionResult) == "undefined")
                 this.skip();
-            else {
+            else
                 expect(regexOptionResult.trimStart).toBeDefined();
-                expect(regexOptionResult.trimStart).not.toBeNull();
-            }
         });
         it('trimEnd property should be defined', function () {
             if (typeof (regexOptionResult) == "undefined")
                 this.skip();
-            else {
+            else
                 expect(regexOptionResult.trimEnd).toBeDefined();
-                expect(regexOptionResult.trimEnd).not.toBeNull();
-            }
         });
         it('lineSeparator property should be defined', function () {
             if (typeof (regexOptionResult) == "undefined")
                 this.skip();
-            else {
+            else
                 expect(regexOptionResult.lineSeparator).toBeDefined();
-                expect(regexOptionResult.lineSeparator).not.toBeNull();
-            }
         });
         it('booleanText property should be defined', function () {
             if (typeof (regexOptionResult) == "undefined")
                 this.skip();
-            else {
+            else
                 expect(regexOptionResult.booleanText).toBeDefined();
-                expect(regexOptionResult.booleanText).not.toBeNull();
-            }
         });
         it('firstLetterLc property should be defined', function () {
             if (typeof (regexOptionResult) == "undefined")
                 this.skip();
-            else {
+            else
                 expect(regexOptionResult.firstLetterLc).toBeDefined();
-                expect(regexOptionResult.firstLetterLc).not.toBeNull();
-            }
         });
         it('abnormalWhitespace property should be defined', function () {
             if (typeof (regexOptionResult) == "undefined")
                 this.skip();
-            else {
+            else
                 expect(regexOptionResult.abnormalWhitespace).toBeDefined();
-                expect(regexOptionResult.abnormalWhitespace).not.toBeNull();
-            }
         });
     });
     describe("Test JsTypeCommander.setPatternOptions() expressions", function () {
@@ -139,13 +120,13 @@ describe("Testing module options settings", function () {
                     testData.setRegexp(arg, /.*/);
                     var result_1 = JsTypeCommander_1.x_44813_util.JsTypeCommander.setPatternOptions(arg);
                     expect(result_1).toBeDefined();
-                    expect(result_1).not.toBeNull();
+                    expect(result_1).not.toBe(null);
                     testDataArr.forEach(function (d) {
                         if (typeof (result_1) == "undefined")
                             return;
                         var existing = d.getRegexp(result_1);
                         expect(existing).toBeDefined();
-                        expect(existing).not.toBeNull();
+                        expect(existing).not.toBe(null);
                         if (typeof (existing) == "undefined")
                             return;
                         if (d.name == testData.name) {
@@ -160,13 +141,13 @@ describe("Testing module options settings", function () {
                     testData.setRegexp(arg, testData.original);
                     result_1 = JsTypeCommander_1.x_44813_util.JsTypeCommander.setPatternOptions(arg);
                     expect(result_1).toBeDefined();
-                    expect(result_1).not.toBeNull();
+                    expect(result_1).not.toBe(null);
                     testDataArr.forEach(function (d) {
                         if (typeof (result_1) == "undefined")
                             return;
                         var existing = d.getRegexp(result_1);
                         expect(existing).toBeDefined();
-                        expect(existing).not.toBeNull();
+                        expect(existing).not.toBe(null);
                         if (typeof (existing) == "undefined")
                             return;
                         var originalRe = d.original;
@@ -184,13 +165,13 @@ describe("Testing module options settings", function () {
             else {
                 var result_2 = JsTypeCommander_1.x_44813_util.JsTypeCommander.setPatternOptions();
                 expect(result_2).toBeDefined();
-                expect(result_2).not.toBeNull();
+                expect(result_2).not.toBe(null);
                 testDataArr.forEach(function (d) {
                     if (typeof (result_2) == "undefined")
                         return;
                     var existing = d.getRegexp(result_2);
                     expect(existing).toBeDefined();
-                    expect(existing).not.toBeNull();
+                    expect(existing).not.toBe(null);
                     if (typeof (existing) == "undefined")
                         return;
                     var originalRe = d.original;

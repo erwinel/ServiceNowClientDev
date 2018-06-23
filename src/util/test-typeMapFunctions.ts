@@ -2,7 +2,7 @@ import { x_44813_util } from '../../compiled/JsTypeCommander';
 
 interface Descriptor { display: string; }
 
-interface ArgumentDescriptor extends Descriptor { getValue: { (): x_44813_util.AnyNilable; } }
+interface ArgumentDescriptor extends Descriptor { getValue: { (): x_44813_util.JsTypeCommander.AnyNilable; } }
 
 enum MapCallbackId {
     whenBoolean = 0x0001,
@@ -75,12 +75,12 @@ interface MapByNilFunction {
     allowNull: boolean
 }
 
-class MapByTypeHelper implements x_44813_util.TypeGuardResultSpecs<x_44813_util.AnyNilable, MapCallbackId> {
+class MapByTypeHelper implements x_44813_util.JsTypeCommander.TypeGuardResultSpecs<x_44813_util.JsTypeCommander.AnyNilable, MapCallbackId> {
     private _isOmmitted: { [key: string]: boolean } = { };
     private _invokeFlags: number = 0;
     private _callCount: number = 0;
-    private _lastArg: x_44813_util.AnyNilable = undefined;
-    private _onInvoked(key: MapCallbackId, value: x_44813_util.AnyNilable): MapCallbackId {
+    private _lastArg: x_44813_util.JsTypeCommander.AnyNilable = undefined;
+    private _onInvoked(key: MapCallbackId, value: x_44813_util.JsTypeCommander.AnyNilable): MapCallbackId {
         this._invokeFlags |= key;
         this._callCount++;
         this._lastArg = value;
@@ -91,15 +91,15 @@ class MapByTypeHelper implements x_44813_util.TypeGuardResultSpecs<x_44813_util.
     private _whenInfinity(value: number): MapCallbackId { return this._onInvoked(MapCallbackId.whenInfinity, value); }
     private _whenNaN(value: number): MapCallbackId { return this._onInvoked(MapCallbackId.whenNaN, value); }
     private _whenNumber(value: number): MapCallbackId { return this._onInvoked(MapCallbackId.whenNumber, value); }
-    private _whenArray(value: x_44813_util.AnyNilable[]): MapCallbackId { return this._onInvoked(MapCallbackId.whenArray, value); }
-    private _whenArrayLike(value: ArrayLike<x_44813_util.AnyNilable>): MapCallbackId { return this._onInvoked(MapCallbackId.whenArrayLike, value); }
-    private _whenNotArrayLike(value: x_44813_util.IStringKeyedObject): MapCallbackId { return this._onInvoked(MapCallbackId.whenNotArrayLike, value); }
+    private _whenArray(value: x_44813_util.JsTypeCommander.AnyNilable[]): MapCallbackId { return this._onInvoked(MapCallbackId.whenArray, value); }
+    private _whenArrayLike(value: ArrayLike<x_44813_util.JsTypeCommander.AnyNilable>): MapCallbackId { return this._onInvoked(MapCallbackId.whenArrayLike, value); }
+    private _whenNotArrayLike(value: x_44813_util.JsTypeCommander.IStringKeyedObject): MapCallbackId { return this._onInvoked(MapCallbackId.whenNotArrayLike, value); }
     private _whenString(value: string): MapCallbackId { return this._onInvoked(MapCallbackId.whenString, value); }
     private _whenSymbol(value: symbol): MapCallbackId { return this._onInvoked(MapCallbackId.whenSymbol, value); }
     private _whenNull(value: null): MapCallbackId { return this._onInvoked(MapCallbackId.whenNull, value); }
     private _whenUndefined(value: undefined): MapCallbackId { return this._onInvoked(MapCallbackId.whenUndefined, value); }
-    private _whenObject(value: x_44813_util.IStringKeyedObject): MapCallbackId { return this._onInvoked(MapCallbackId.whenObject, value); }
-    private _invokeThis<T>(name: string, func: x_44813_util.MapFromValueCallback<T, MapCallbackId>) : x_44813_util.MapFromValueCallback<T, MapCallbackId>|undefined {
+    private _whenObject(value: x_44813_util.JsTypeCommander.IStringKeyedObject): MapCallbackId { return this._onInvoked(MapCallbackId.whenObject, value); }
+    private _invokeThis<T>(name: string, func: x_44813_util.JsTypeCommander.MapFromValueCallback<T, MapCallbackId>) : x_44813_util.JsTypeCommander.MapFromValueCallback<T, MapCallbackId>|undefined {
         if (this._isOmmitted[name])
             return;
         let thisObj = this;
@@ -134,22 +134,22 @@ class MapByTypeHelper implements x_44813_util.TypeGuardResultSpecs<x_44813_util.
     }
     get invokeFlags(): number { return this._invokeFlags; }
     get callCount(): number { return this._callCount; }
-    get lastArg(): x_44813_util.AnyNilable { return this._lastArg; }
+    get lastArg(): x_44813_util.JsTypeCommander.AnyNilable { return this._lastArg; }
     get thisObj(): MapByTypeHelper { return this; }
-    get whenBoolean(): x_44813_util.MapFromValueCallback<boolean, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<boolean>("whenBoolean", this._whenBoolean); }
-    get whenFunction(): x_44813_util.MapFromValueCallback<Function, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<Function>("whenFunction", this._whenFunction); }
-    get whenInfinity(): x_44813_util.MapFromValueCallback<number, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<number>("whenInfinity", this._whenInfinity); }
-    get whenNaN(): x_44813_util.MapFromValueCallback<number, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<number>("whenNaN", this._whenNaN); }
-    get whenNumber(): x_44813_util.MapFromValueCallback<number, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<number>("whenNumber", this._whenNumber); }
-    get whenArray(): x_44813_util.MapFromValueCallback<x_44813_util.AnyNilable[], MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<x_44813_util.AnyNilable[]>("whenArray", this._whenArray); }
-    get whenArrayLike(): x_44813_util.MapFromValueCallback<ArrayLike<x_44813_util.AnyNilable>, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<ArrayLike<x_44813_util.AnyNilable>>("whenArrayLike", this._whenArrayLike); }
-    get whenNotArrayLike(): x_44813_util.MapFromValueCallback<x_44813_util.IStringKeyedObject, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<x_44813_util.IStringKeyedObject>("whenNotArrayLike", this._whenNotArrayLike); }
-    get whenString(): x_44813_util.MapFromValueCallback<string, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<string>("whenString", this._whenString); }
-    get whenSymbol(): x_44813_util.MapFromValueCallback<symbol, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<symbol>("whenSymbol", this._whenSymbol); }
-    get whenNull(): x_44813_util.MapFromValueCallback<null, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<null>("whenNull", this._whenNull); }
-    get whenUndefined(): x_44813_util.MapFromValueCallback<undefined, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<undefined>("whenUndefined", this._whenUndefined); }
-    get whenObject(): x_44813_util.MapFromValueCallback<x_44813_util.IStringKeyedObject, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<x_44813_util.IStringKeyedObject>("whenObject", this._whenObject); }
-    otherwise(value: x_44813_util.AnyNilable): MapCallbackId { return this._onInvoked(MapCallbackId.otherwise, value); }
+    get whenBoolean(): x_44813_util.JsTypeCommander.MapFromValueCallback<boolean, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<boolean>("whenBoolean", this._whenBoolean); }
+    get whenFunction(): x_44813_util.JsTypeCommander.MapFromValueCallback<Function, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<Function>("whenFunction", this._whenFunction); }
+    get whenInfinity(): x_44813_util.JsTypeCommander.MapFromValueCallback<number, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<number>("whenInfinity", this._whenInfinity); }
+    get whenNaN(): x_44813_util.JsTypeCommander.MapFromValueCallback<number, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<number>("whenNaN", this._whenNaN); }
+    get whenNumber(): x_44813_util.JsTypeCommander.MapFromValueCallback<number, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<number>("whenNumber", this._whenNumber); }
+    get whenArray(): x_44813_util.JsTypeCommander.MapFromValueCallback<x_44813_util.JsTypeCommander.AnyNilable[], MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<x_44813_util.JsTypeCommander.AnyNilable[]>("whenArray", this._whenArray); }
+    get whenArrayLike(): x_44813_util.JsTypeCommander.MapFromValueCallback<ArrayLike<x_44813_util.JsTypeCommander.AnyNilable>, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<ArrayLike<x_44813_util.JsTypeCommander.AnyNilable>>("whenArrayLike", this._whenArrayLike); }
+    get whenNotArrayLike(): x_44813_util.JsTypeCommander.MapFromValueCallback<x_44813_util.JsTypeCommander.IStringKeyedObject, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<x_44813_util.JsTypeCommander.IStringKeyedObject>("whenNotArrayLike", this._whenNotArrayLike); }
+    get whenString(): x_44813_util.JsTypeCommander.MapFromValueCallback<string, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<string>("whenString", this._whenString); }
+    get whenSymbol(): x_44813_util.JsTypeCommander.MapFromValueCallback<symbol, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<symbol>("whenSymbol", this._whenSymbol); }
+    get whenNull(): x_44813_util.JsTypeCommander.MapFromValueCallback<null, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<null>("whenNull", this._whenNull); }
+    get whenUndefined(): x_44813_util.JsTypeCommander.MapFromValueCallback<undefined, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<undefined>("whenUndefined", this._whenUndefined); }
+    get whenObject(): x_44813_util.JsTypeCommander.MapFromValueCallback<x_44813_util.JsTypeCommander.IStringKeyedObject, MapCallbackId>|MapCallbackId|undefined { return this._invokeThis<x_44813_util.JsTypeCommander.IStringKeyedObject>("whenObject", this._whenObject); }
+    otherwise(value: x_44813_util.JsTypeCommander.AnyNilable): MapCallbackId { return this._onInvoked(MapCallbackId.otherwise, value); }
     toJSON(): { [key: number]: boolean|undefined } {
         let allIds: MapCallbackId[] = [ MapCallbackId.whenBoolean, MapCallbackId.whenFunction, MapCallbackId.whenInfinity, MapCallbackId.whenNaN, MapCallbackId.whenNumber, MapCallbackId.whenArray, MapCallbackId.whenArrayLike, MapCallbackId.whenNotArrayLike, MapCallbackId.whenString,
             MapCallbackId.whenSymbol, MapCallbackId.whenNull, MapCallbackId.whenUndefined, MapCallbackId.whenObject ];
@@ -166,7 +166,7 @@ class MapByNilHelper {
     private _whenTrueInvoked: boolean = false;
     private _otherwiseInvoked: boolean = false;
     private _callCount: number = 0;
-    private _lastArg: x_44813_util.AnyNilable = undefined;
+    private _lastArg: x_44813_util.JsTypeCommander.AnyNilable = undefined;
     private _trueNum: number;
     private _otherwiseNum: number;
     get whenTrueInvoked(): boolean { return this._whenTrueInvoked; }
@@ -174,7 +174,7 @@ class MapByNilHelper {
     get callCount(): number { return this._callCount; }
     get trueNum(): number { return this._trueNum; }
     get otherwiseNum(): number { return this._otherwiseNum; }
-    whenTrue(arg: x_44813_util.AnyNilable): number {
+    whenTrue(arg: x_44813_util.JsTypeCommander.AnyNilable): number {
         this._callCount++;
         this._whenTrueInvoked = true;
         this._lastArg = arg;
@@ -359,9 +359,9 @@ describe("Testing type map functions", function() {
                         let omit: MapCallbackName[] = (typeof(opt.omit) == "undefined") ? [] : ((typeof(opt.omit) == "string") ? [opt.omit] : opt.omit);
                         args.forEach(argInfo => {
                             let tgh: MapByTypeHelper = new MapByTypeHelper(omit);
-                            it('JsTypeCommander.mapByTypeValue(' + argInfo.display + ', ' + JSON.stringify(tgh.toJSON()) + ((typeof(opt.checkElements) == "boolean") ? ", " +
+                            it('x_44813_util.JsTypeCommander.mapByTypeValue(' + argInfo.display + ', ' + JSON.stringify(tgh.toJSON()) + ((typeof(opt.checkElements) == "boolean") ? ", " +
                                     opt.checkElements : "") + ') should return ' + opt.expected + " (calling " + mapCallbackIdToName(opt.expected) + ")", function() {
-                                let result: x_44813_util.AnyNilable = (typeof(opt.checkElements) == "boolean") ?
+                                let result: x_44813_util.JsTypeCommander.AnyNilable = (typeof(opt.checkElements) == "boolean") ?
                                     x_44813_util.JsTypeCommander.mapByTypeValue.call(this, argInfo.getValue(), tgh, opt.checkElements) :
                                     x_44813_util.JsTypeCommander.mapByTypeValue.call(this, argInfo.getValue(), tgh);
                                 dataIterationIndex++;
@@ -400,8 +400,8 @@ describe("Testing type map functions", function() {
                 let expected: number = (whenTrue) ? mapByNilHelper.trueNum : mapByNilHelper.otherwiseNum;
                 it(mapByNilFunction.name + "(" + argInfo.display + ", fn(v) => " + mapByNilHelper.trueNum + ', fn' + ((mapByNilFunction.name == "mapByNotNil") ? '(v)' : '()') +
                         ' => ' + mapByNilHelper.otherwiseNum + ') should return ' + expected + ' (' + ((whenTrue) ? 'whenTrue' : 'otherwise') + ')', function() {
-                    let result: x_44813_util.AnyNilable = mapByNilFunction.callback(argInfo.getValue(), mapByNilHelper.whenTrue, mapByNilHelper.otherwise, mapByNilHelper);
-                    expect(typeof(result)).toBe('number')
+                    let result: x_44813_util.JsTypeCommander.AnyNilable = mapByNilFunction.callback(argInfo.getValue(), mapByNilHelper.whenTrue, mapByNilHelper.otherwise, mapByNilHelper);
+                    expect(typeof(result)).toBe('number');
                     expect(result).toBe(expected);
                     expect(mapByNilHelper.callCount).not.toBe(0, 'Callback not invoked');
                     expect(mapByNilHelper.callCount).toBe(1, 'Callback invoked more than once');
@@ -414,6 +414,141 @@ describe("Testing type map functions", function() {
         });
     }, this);
 });
-describe("Testing function mapInto(obj: any, callbackfn: RecursiveMapCallbackFn, options?: MapIntoOptions): any", function() {
 
+describe("Testing function mapInto(obj: any, callbackFn: RecursiveMapCallbackFn, options?: MapIntoOptions): any", function() {
+    let sourceNumber: number = 7;
+    let expectedNumber: number = sourceNumber / 2;
+    it("JsTypeCommander.mapInto(" + sourceNumber + ", (current, key, source, target) => current / 2)) should return " + expectedNumber, function() {
+        let callbackFn: x_44813_util.JsTypeCommander.RecursiveMapCallbackFn = function(current: x_44813_util.JsTypeCommander.AnyNilable, key: number | string | undefined, source: x_44813_util.JsTypeCommander.AnyNilable[] | x_44813_util.JsTypeCommander.IStringKeyedObject | undefined, target: x_44813_util.JsTypeCommander.AnyNilable[] | x_44813_util.JsTypeCommander.IStringKeyedObject | undefined) {
+            return current / 2;
+        };
+        let actual: any = x_44813_util.JsTypeCommander.mapInto(sourceNumber, callbackFn);
+        expect(typeof(actual)).toBe("number");
+        expect(actual).toBe(expectedNumber);
+    });
+    let sourceArray1: any[] = [true, "2", 3];
+    let expectedArray1: string[] = ["true", "2", "3"];
+    it("JsTypeCommander.mapInto(" + JSON.stringify(sourceArray1) + ", (current, key, source, target): any)) should return" + JSON.stringify(expectedArray1), function() {
+        let callbackFn: x_44813_util.JsTypeCommander.RecursiveMapCallbackFn = function(current: x_44813_util.JsTypeCommander.AnyNilable, key: number | string | undefined, source: x_44813_util.JsTypeCommander.AnyNilable[] | x_44813_util.JsTypeCommander.IStringKeyedObject | undefined, target: x_44813_util.JsTypeCommander.AnyNilable[] | x_44813_util.JsTypeCommander.IStringKeyedObject | undefined) {
+            if (x_44813_util.JsTypeCommander.notDefined(source))
+                return [];
+            return current.toString();
+        };
+        let actual: any = x_44813_util.JsTypeCommander.mapInto(sourceArray1, callbackFn);
+        expect(typeof(actual)).toBe("object");
+        expect(Array.isArray(actual)).toBe(true, "Result value is not an array");
+        if (Array.isArray(actual)) {
+            expect(actual.length).toBe(expectedArray1.length, "length mismatch");
+            for (var i: number = 0; i < expectedArray1.length; i++)
+            {
+                expect(typeof(actual[i])).toBe("string", "Element " + i + " type mismatch");
+                expect(actual[i]).toBe(expectedArray1[i], "Element " + i + " value mismatch");
+            }
+        }
+    });
+    let myThisObj: { count: number, count2: number } = { count: 0, count2: 0 };
+    let sourceOpts1: x_44813_util.JsTypeCommander.MapIntoOptions = {
+        thisObj: myThisObj,
+        totalMaxItems: 6
+    };
+    let sourceArray2: x_44813_util.JsTypeCommander.AnyNilable[] = [undefined, null, true, false, 0, "test", 5.6];
+    let expectedArray2: string[] = ["undefined", "null", "true", "false", "0", "\"test\""];
+    it("JsTypeCommander.mapInto(" + (sourceArray2.map(i => {
+        if (x_44813_util.JsTypeCommander.notDefined(i))
+            return "undefined";
+        if (x_44813_util.JsTypeCommander.isNull(i))
+            return "null";
+        return JSON.stringify(i);
+    })) + ", (current, key, source, target): any, " + JSON.stringify(sourceOpts1) + ")) should return" + JSON.stringify(expectedArray2) + " and thisObj.count should be " + expectedArray2.length + 1, function() {
+        let callbackFn: x_44813_util.JsTypeCommander.RecursiveMapCallbackFn = function(this: { count: number }, current: x_44813_util.JsTypeCommander.AnyNilable, key: number | string | undefined, source: x_44813_util.JsTypeCommander.AnyNilable[] | x_44813_util.JsTypeCommander.IStringKeyedObject | undefined, target: x_44813_util.JsTypeCommander.AnyNilable[] | x_44813_util.JsTypeCommander.IStringKeyedObject | undefined) {
+            this.count++;
+            if (x_44813_util.JsTypeCommander.notDefined(source))
+                return [];
+            if (x_44813_util.JsTypeCommander.notDefined(current))
+                return "undefined";
+            if (x_44813_util.JsTypeCommander.isNull(current))
+                return "null";
+            return JSON.stringify(current);
+        };
+        myThisObj.count = 0;
+        myThisObj.count2 = 0;
+        let actual: any = x_44813_util.JsTypeCommander.mapInto(sourceArray2, callbackFn, sourceOpts1);
+        expect(typeof(actual)).toBe("object");
+        expect(Array.isArray(actual)).toBe(true, "Result value is not an array");
+        if (Array.isArray(actual)) {
+            if (actual.length != expectedArray2.length) {
+                expect(actual).toBe(expectedArray2);
+                expect(actual.length).toBe(expectedArray2.length, "length mismatch");
+            }
+            for (var i: number = 0; i < expectedArray2.length; i++)
+            {
+                expect(typeof(actual[i])).toBe("string", "Element " + i + " type mismatch in ");
+                expect(actual[i]).toBe(expectedArray2[i], "Element " + i + " value mismatch");
+            }
+        }
+        expect(myThisObj.count).toBe(expectedArray2.length + 1);
+    });
+    
+    let sourceArray3: any[] = [{a: 1, b: 2}, 3, 4, ["Eins", "Svein", "Drei"]];
+    let expectedArray3: any[] = [{count: 2, a: 1, b: 2}, 3, 4, ["Eins", "Svein", "Drei"]];
+    myThisObj.count = 0;
+    myThisObj.count2 = 0;
+    let sourceOpts2: x_44813_util.JsTypeCommander.MapIntoOptions = { thisObj: myThisObj };
+    it("JsTypeCommander.mapInto(" + JSON.stringify(sourceArray3) + ", (current, key, source, target): any, " + JSON.stringify(sourceOpts2) + ")) should return " + JSON.stringify(expectedArray3) + " and thisObj.count should be 10", function() {
+        let callbackFn: x_44813_util.JsTypeCommander.RecursiveMapCallbackFn = function(this: { count: number }, current: x_44813_util.JsTypeCommander.AnyNilable, key: number | string | undefined, source: x_44813_util.JsTypeCommander.AnyNilable[] | x_44813_util.JsTypeCommander.IStringKeyedObject | undefined, target: x_44813_util.JsTypeCommander.AnyNilable[] | x_44813_util.JsTypeCommander.IStringKeyedObject | undefined) {
+            this.count++;
+            if (x_44813_util.JsTypeCommander.notDefined(source) || Array.isArray(current))
+                return [];
+            return (x_44813_util.JsTypeCommander.isObject(current)) ? { count: this.count } :  current;
+        };
+        myThisObj.count = 0;
+        myThisObj.count2 = 0;
+        let actual: any = x_44813_util.JsTypeCommander.mapInto(sourceArray3, callbackFn, sourceOpts2);
+        (<x_44813_util.JsTypeCommander.IStringKeyedObject>(sourceArray3[0]))["a"] = 5;
+        (<x_44813_util.JsTypeCommander.IStringKeyedObject>(sourceArray3[0]))["b"] = 5;
+        sourceArray3[1] = 5;
+        sourceArray3[2] = 5;
+        sourceArray3[3][0] = "5";
+        sourceArray3[3][1] = "5";
+        sourceArray3[3][2] = "5";
+        expect(typeof(actual)).toBe("object");
+        expect(Array.isArray(actual)).toBe(true, "Result value is not an array");
+        if (Array.isArray(actual)) {
+            expect(actual.length).toBe(expectedArray3.length, "length mismatch");
+            let obj: any = actual[0];
+            expect(x_44813_util.JsTypeCommander.isNonArrayObject(obj)).toBe(true, "Element 0 is not a non-array object");
+            if (x_44813_util.JsTypeCommander.isNonArrayObject(obj)) {
+                let e0: x_44813_util.JsTypeCommander.IStringKeyedObject = <x_44813_util.JsTypeCommander.IStringKeyedObject>(expectedArray3[0]);
+                expect(typeof(obj["a"])).toBe("number", "actual[0].a is not a number");
+                expect(obj["a"]).toBe(e0["a"], "actual[0].a value mismatch");
+                expect(typeof(obj["b"])).toBe("number", "actual[0].b is not a number");
+                expect(obj["b"]).toBe(e0["b"], "actual[0].b value mismatch");
+                expect(typeof(obj["count"])).toBe("number", "actual[0].count is not a number");
+            }
+            obj = actual[1];
+            expect(x_44813_util.JsTypeCommander.isNumber(obj)).toBe(true, "Element 1 is not a number");
+            if (x_44813_util.JsTypeCommander.isNumber(obj)) {
+                expect(typeof(obj)).toBe("number", "actual[1] is not a number");
+                expect(obj).toBe(expectedArray3[1], "actual[1] value mismatch");
+            }
+            obj = actual[2];
+            expect(x_44813_util.JsTypeCommander.isNumber(obj)).toBe(true, "Element 2 is not a number");
+            if (x_44813_util.JsTypeCommander.isNumber(obj)) {
+                expect(typeof(obj)).toBe("number", "actual[2] is not a number");
+                expect(obj).toBe(expectedArray3[2], "actual[2] value mismatch");
+            }
+            obj = actual[3];
+            expect(typeof(obj)).toBe("object", "Element 3 is not an array");
+            expect(Array.isArray(obj)).toBe(true, "Element 3 is not an array");
+            if (Array.isArray(obj)) {
+                let arr: string[] = <string[]>(expectedArray3[3]);
+                expect(obj.length).toBe(arr.length);
+                for (var i = 0; i < arr.length; i++) {
+                    expect(typeof(obj[i])).toBe("string", "actual[3][" + i + "] is not a string");
+                    expect(obj[i]).toBe(arr[i], "actual[3][" + i + "] value mismatch");
+                }
+            }
+        }
+        expect(myThisObj.count).toBe(10, "thisObj.count failed");
+    });
 });

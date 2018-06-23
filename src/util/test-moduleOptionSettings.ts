@@ -1,121 +1,95 @@
 import { x_44813_util } from '../../compiled/JsTypeCommander';
 describe("Testing module options settings", function() {
     describe("Testing JsTypeCommander.getDefaultLineSeparatorSequence()", function() {
+        x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence();
         it('JsTypeCommander.getDefaultLineSeparatorSequence() should return "\\n"', function() {
             let result: string|null|undefined = x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
-            expect(result).toBeDefined();
+            expect(typeof(result)).toBe('string', "result is not a string");
             expect(result).toBe("\n");
         });
     });
     describe("Testing JsTypeCommander.setDefaultLineSeparatorSequence()", function() {
-        it('JsTypeCommander.setDefaultLineSeparatorSequence("\\r\\n") should return "\\r\\n"', function() {
+        it('JsTypeCommander.setDefaultLineSeparatorSequence("\\r\\n") should return "\\r\\n", then getDefaultLineSeparatorSequence() should return "\\r\\n"', function() {
             let result: string|null|undefined = x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence("\r\n");
-            expect(result).toBeDefined();
+            expect(typeof(result)).toBe('string', "result is not a string");
             expect(result).toBe("\r\n");
+            result = x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
+            expect(typeof(result)).toBe('string', "validation is not a string");
+            expect(result).toBe("\r\n", "Validation failed");
         });
-        it('JsTypeCommander.getDefaultLineSeparatorSequence() should return "\\r\\n"', function() {
-            x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence("\r\n");
-            let result: string|null|undefined = x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
-            expect(result).toBeDefined();
-            expect(result).toBe("\r\n");
-        });
-        it('JsTypeCommander.setDefaultLineSeparatorSequence() should return "\\n"', function() {
+        it('JsTypeCommander.setDefaultLineSeparatorSequence() should return "\\n", then getDefaultLineSeparatorSequence() should return "\\n"', function() {
             let result: string|null|undefined = x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence();
-            expect(result).toBeDefined();
+            expect(typeof(result)).toBe('string', "result is not a string");
             expect(result).toBe("\n");
-        });
-        it('JsTypeCommander.getDefaultLineSeparatorSequence() should return "\\n"', function() {
-            x_44813_util.JsTypeCommander.setDefaultLineSeparatorSequence();
-            let result: string|null|undefined = x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
-            expect(result).toBeDefined();
-            expect(result).toBe("\n");
+            result = x_44813_util.JsTypeCommander.getDefaultLineSeparatorSequence();
+            expect(typeof(result)).toBe('string', "validation is not a string");
+            expect(result).toBe("\n", "Validation failed");
         });
     });
     
     describe("Testing JsTypeCommander.getPatternOptions()", function() {
         it('JsTypeCommander.getPatternOptions() should not return nil', function() {
-            let regexOptionResult: x_44813_util.IJsTypeCommanderRegex|null|undefined = x_44813_util.JsTypeCommander.getPatternOptions();
+            let regexOptionResult: x_44813_util.JsTypeCommander.IJsTypeCommanderRegex|null|undefined = x_44813_util.JsTypeCommander.getPatternOptions();
             expect(regexOptionResult).toBeDefined();
-            expect(regexOptionResult).not.toBeNull();
+            expect(regexOptionResult).not.toBe(null);
         });
     });
     describe("Checking JsTypeCommander.getPatternOptions() properties", function() {
-        let regexOptionResult: x_44813_util.IJsTypeCommanderRegex|undefined;
+        let regexOptionResult: x_44813_util.JsTypeCommander.IJsTypeCommanderRegex|undefined;
         try { regexOptionResult = x_44813_util.JsTypeCommander.getPatternOptions(); } catch { regexOptionResult = undefined; }
         it('onlyWhitespace property should be defined', function() {
             if (typeof(regexOptionResult) == "undefined")
                 this.skip();
             else
-            {
                 expect(regexOptionResult.onlyWhitespace).toBeDefined();
-                expect(regexOptionResult.onlyWhitespace).not.toBeNull();
-            }
         });
         it('trimStart property should be defined', function() {
             if (typeof(regexOptionResult) == "undefined")
                 this.skip();
             else
-            {
                 expect(regexOptionResult.trimStart).toBeDefined();
-                expect(regexOptionResult.trimStart).not.toBeNull();
-            }
         });
         it('trimEnd property should be defined', function() {
             if (typeof(regexOptionResult) == "undefined")
                 this.skip();
             else
-            {
                 expect(regexOptionResult.trimEnd).toBeDefined();
-                expect(regexOptionResult.trimEnd).not.toBeNull();
-            }
         });
         it('lineSeparator property should be defined', function() {
             if (typeof(regexOptionResult) == "undefined")
                 this.skip();
             else
-            {
                 expect(regexOptionResult.lineSeparator).toBeDefined();
-                expect(regexOptionResult.lineSeparator).not.toBeNull();
-            }
         });
         it('booleanText property should be defined', function() {
             if (typeof(regexOptionResult) == "undefined")
                 this.skip();
             else
-            {
                 expect(regexOptionResult.booleanText).toBeDefined();
-                expect(regexOptionResult.booleanText).not.toBeNull();
-            }
         });
         it('firstLetterLc property should be defined', function() {
             if (typeof(regexOptionResult) == "undefined")
                 this.skip();
             else
-            {
                 expect(regexOptionResult.firstLetterLc).toBeDefined();
-                expect(regexOptionResult.firstLetterLc).not.toBeNull();
-            }
         });
         it('abnormalWhitespace property should be defined', function() {
             if (typeof(regexOptionResult) == "undefined")
                 this.skip();
             else
-            {
                 expect(regexOptionResult.abnormalWhitespace).toBeDefined();
-                expect(regexOptionResult.abnormalWhitespace).not.toBeNull();
-            }
         });
     });
     describe("Test JsTypeCommander.setPatternOptions() expressions", function() {
-        let regexOptionResult: x_44813_util.IJsTypeCommanderRegex|undefined;
+        let regexOptionResult: x_44813_util.JsTypeCommander.IJsTypeCommanderRegex|undefined;
         try { regexOptionResult = x_44813_util.JsTypeCommander.setPatternOptions(); } catch { regexOptionResult = undefined; }
-        let originals: x_44813_util.IJsTypeCommanderRegex;
+        let originals: x_44813_util.JsTypeCommander.IJsTypeCommanderRegex;
         let testRe = /.*/;
         let testDataArr: {
             name: string,
             original: RegExp,
-            getRegexp: { (arg: x_44813_util.IJsTypeCommanderRegex): RegExp|undefined; }
-            setRegexp: { (arg: x_44813_util.IJsTypeCommanderRegex, value: RegExp): void; }
+            getRegexp: { (arg: x_44813_util.JsTypeCommander.IJsTypeCommanderRegex): RegExp|undefined; }
+            setRegexp: { (arg: x_44813_util.JsTypeCommander.IJsTypeCommanderRegexOpt, value: RegExp): void; }
         }[] = [
             { name: 'abnormalWhitespace', original: testRe, getRegexp: r => r.abnormalWhitespace, setRegexp: (r, v) => { r.abnormalWhitespace = v; } },
             { name: 'booleanText', original: testRe, getRegexp: r => r.booleanText, setRegexp: (r, v) => { r.booleanText = v; } },
@@ -138,17 +112,17 @@ describe("Testing module options settings", function() {
                 if (typeof(regexOptionResult) == "undefined")
                     this.skip();
                 else {
-                    let arg: x_44813_util.IJsTypeCommanderRegex = { };
+                    let arg: x_44813_util.JsTypeCommander.IJsTypeCommanderRegexOpt = { };
                     testData.setRegexp(arg, /.*/);
-                    let result: x_44813_util.IJsTypeCommanderRegex|undefined = x_44813_util.JsTypeCommander.setPatternOptions(arg);
+                    let result: x_44813_util.JsTypeCommander.IJsTypeCommanderRegex|undefined = x_44813_util.JsTypeCommander.setPatternOptions(arg);
                     expect(result).toBeDefined();
-                    expect(result).not.toBeNull();
+                    expect(result).not.toBe(null);
                     testDataArr.forEach(d => {
                         if (typeof(result) == "undefined")
                             return;
                         let existing = d.getRegexp(result);
                         expect(existing).toBeDefined();
-                        expect(existing).not.toBeNull();
+                        expect(existing).not.toBe(null);
                         if (typeof(existing) == "undefined")
                             return;
                         if (d.name == testData.name) {
@@ -163,13 +137,13 @@ describe("Testing module options settings", function() {
                     testData.setRegexp(arg, testData.original);
                     result = x_44813_util.JsTypeCommander.setPatternOptions(arg);
                     expect(result).toBeDefined();
-                    expect(result).not.toBeNull();
+                    expect(result).not.toBe(null);
                     testDataArr.forEach(d => {
                         if (typeof(result) == "undefined")
                             return;
                         let existing = d.getRegexp(result);
                         expect(existing).toBeDefined();
-                        expect(existing).not.toBeNull();
+                        expect(existing).not.toBe(null);
                         if (typeof(existing) == "undefined")
                             return;
                         let originalRe = d.original;
@@ -185,15 +159,15 @@ describe("Testing module options settings", function() {
             if (typeof(regexOptionResult) == "undefined")
                 this.skip();
             else {
-                let result: x_44813_util.IJsTypeCommanderRegex|undefined = x_44813_util.JsTypeCommander.setPatternOptions();
+                let result: x_44813_util.JsTypeCommander.IJsTypeCommanderRegex|undefined = x_44813_util.JsTypeCommander.setPatternOptions();
                 expect(result).toBeDefined();
-                expect(result).not.toBeNull();
+                expect(result).not.toBe(null);
                 testDataArr.forEach(d => {
                     if (typeof(result) == "undefined")
                         return;
                     let existing = d.getRegexp(result);
                     expect(existing).toBeDefined();
-                    expect(existing).not.toBeNull();
+                    expect(existing).not.toBe(null);
                     if (typeof(existing) == "undefined")
                         return;
                     let originalRe = d.original;

@@ -1818,7 +1818,7 @@ export namespace x_44813_util {
             (current: AnyNilable, key: number|string|undefined, source: AnyNilable[]|IStringKeyedObject|undefined, target: AnyNilable[]|IStringKeyedObject|undefined): AnyNilable;
         }
     
-        class limitingIterator implements MapIntoOptions {
+        class JSTCLimitingIterator implements MapIntoOptions {
             callbackfn: RecursiveMapCallbackFn;
             totalMaxItems: number = 8192;
             currentTotalItems: number = 0;
@@ -1962,7 +1962,7 @@ export namespace x_44813_util {
          *     // myOptions.thisObj.count === 9
          */
         export function mapInto(obj: any, callbackFn: RecursiveMapCallbackFn, options?: MapIntoOptions): any {
-            let i: limitingIterator = new limitingIterator(callbackFn, options);
+            let i: JSTCLimitingIterator = new JSTCLimitingIterator(callbackFn, options);
             return i.iterateInto(i.maxDepth, obj, undefined, undefined, undefined);
         }
     }

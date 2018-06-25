@@ -1,5 +1,8 @@
-var JsTypeCommander = (function (JsTypeCommander) {
-    "use strict";
+var x_44813_util = x_44813_util || {};
+
+x_44813_util.JsTypeCommander = (function() {
+	"use strict";
+
     var patternDefaults = {
         newLineSequence: "\n",
         regex: {
@@ -24,6 +27,9 @@ var JsTypeCommander = (function (JsTypeCommander) {
             abnormalWhitespace: patternDefaults.regex.abnormalWhitespace
         }
     };
+
+    var JsTypeCommander = { type:  "JsTypeCommander" };
+    
     /**
      * Gets the default character sequence that will be used when joining lines of text.
      * @returns {string} The default character sequence that will be used when joining lines of text.
@@ -63,7 +69,6 @@ var JsTypeCommander = (function (JsTypeCommander) {
             patternOptions.regex.abnormalWhitespace = patternDefaults.regex.abnormalWhitespace;
         }
         else if (typeof (settings) == "object") {
-            // TODO: Test individual settings to see if they are regular expressions or strings
             if (!isNil(settings.onlyWhitespace))
                 patternOptions.regex.onlyWhitespace = settings.onlyWhitespace;
             if (!isNil(settings.trimStart))
@@ -1268,23 +1273,33 @@ var JsTypeCommander = (function (JsTypeCommander) {
      * If the object is Array-like, an array is returned with values taken from each of its indexed values.
      * Otherwise, an array with a single element containing the value is returned.
      * @example
-     * TypeScript:
-     *     import { JsTypeCommander } from 'JsTypeCommander';
-     *     let myVar: any = 7;
-     *     let arrayObj = JsTypeCommander.toArray(myVar);
+     * JavaScript:
+     *     var myVar = 7;
+     *     var arrayObj = x_44813_util.JsTypeCommander.toArray(myVar);
      *     // returns: [7]
      *     myVar = { 0: "a", 1: 7, length: 2 };
-     *     arrayObj = JsTypeCommander.toArray(myVar);
+     *     arrayObj = x_44813_util.JsTypeCommander.toArray(myVar);
      *     // returns: ["a", 7]
      *     myVar = { 0: "a", 2: 7, length: 3 };
-     *     arrayObj = JsTypeCommander.toArray(myVar);
+     *     arrayObj = x_44813_util.JsTypeCommander.toArray(myVar);
      *     // returns: ["a", undefined, 7]
      *     myVar = { 0: "a", 2: 7, length: 3 };
-     *     arrayObj = JsTypeCommander.toArray(myVar, true);
+     *     arrayObj = x_44813_util.JsTypeCommander.toArray(myVar, true);
      *     // returns: [{ 0: "a", 2: 7, length: 3 }]
-     *
-     * JavaScript:
-     *     var JsTypeCommander = require("JsTypeCommander").JsTypeCommander;
+     * TypeScript:
+     *     import { x_44813_util } from 'JsTypeCommander';
+     *     let myVar: any = 7;
+     *     let arrayObj = x_44813_util.JsTypeCommander.toArray(myVar);
+     *     // returns: [7]
+     *     myVar = { 0: "a", 1: 7, length: 2 };
+     *     arrayObj = x_44813_util.JsTypeCommander.toArray(myVar);
+     *     // returns: ["a", 7]
+     *     myVar = { 0: "a", 2: 7, length: 3 };
+     *     arrayObj = x_44813_util.JsTypeCommander.toArray(myVar);
+     *     // returns: ["a", undefined, 7]
+     *     myVar = { 0: "a", 2: 7, length: 3 };
+     *     arrayObj = x_44813_util.JsTypeCommander.toArray(myVar, true);
+     *     // returns: [{ 0: "a", 2: 7, length: 3 }]
      */
     function toArray(obj, checkElements) {
         if (isArray(obj))
@@ -1307,15 +1322,15 @@ var JsTypeCommander = (function (JsTypeCommander) {
      * @returns {boolean} True if the object is determined to inherit from the specified class; otherwise false.
      * @example The following example demonstrates testing whether an object was constructed from a specific constructor.
      * let objToTest: any = new Error("My Error");
-     * let result: boolean = JsTypeCommander.derivesFrom(objToTest, Error);
+     * let result: boolean = x_44813_util.JsTypeCommander.derivesFrom(objToTest, Error);
      * // result === true
-     * result = JsTypeCommander.derivesFrom(objToTest, RangeError);
+     * result = x_44813_util.JsTypeCommander.derivesFrom(objToTest, RangeError);
      * // result === false (Error does not inherit from RangeError)
      * objToTest = new RangeError();
-     * result = JsTypeCommander.derivesFrom(objToTest, Error);
+     * result = x_44813_util.JsTypeCommander.derivesFrom(objToTest, Error);
      * // result === true
      * objToTest = { message: "My Error", name: "Error" };
-     * result = JsTypeCommander.derivesFrom(objToTest, Error);
+     * result = x_44813_util.JsTypeCommander.derivesFrom(objToTest, Error);
      * // result === false
      */
     function derivesFrom(obj, classConstructor) {
@@ -1426,16 +1441,16 @@ var JsTypeCommander = (function (JsTypeCommander) {
      * @returns {boolean} True if the object has properties similar to an Error object; otherwise, false.
      * @example The following example demonstrates testing various object to see if they are error-like.
      * objToTest = new Error("My Error");
-     * result = JsTypeCommander.isErrorLike(objToTest);
+     * result = x_44813_util.JsTypeCommander.isErrorLike(objToTest);
      * // result === true
      * objToTest = new RangeError();
-     * result = JsTypeCommander.isErrorLike(objToTest);
+     * result = x_44813_util.JsTypeCommander.isErrorLike(objToTest);
      * // result === true
      * objToTest = { message: "My Error" };
-     * result = JsTypeCommander.isErrorLike(objToTest);
+     * result = x_44813_util.JsTypeCommander.isErrorLike(objToTest);
      * // result === true
      * objToTest = { message: "My Error", number: true };
-     * result = JsTypeCommander.isErrorLike(objToTest);
+     * result = x_44813_util.JsTypeCommander.isErrorLike(objToTest);
      * // result === false (typeof(number) !== "number"))
      */
     function isErrorLike(obj) {
@@ -1489,8 +1504,8 @@ var JsTypeCommander = (function (JsTypeCommander) {
         return s;
     }
     JsTypeCommander.asErrorLike = asErrorLike;
-    var limitingIterator = /** @class */ (function () {
-        function limitingIterator(callbackfn, options) {
+    var JSTCLimitingIterator = /** @class */ (function () {
+        function JSTCLimitingIterator(callbackfn, options) {
             this.totalMaxItems = 8192;
             this.currentTotalItems = 0;
             this.maxItemsInObject = 1024;
@@ -1503,7 +1518,7 @@ var JsTypeCommander = (function (JsTypeCommander) {
                 this.thisObj = options.thisObj;
             }
         }
-        limitingIterator.prototype.iterateInto = function (maxDepth, current, key, source, target) {
+        JSTCLimitingIterator.prototype.iterateInto = function (maxDepth, current, key, source, target) {
             if (maxDepth < 1 || this.totalMaxItems < 1)
                 return current;
             target = (isNil(this.thisObj)) ? this.callbackfn(current, key, source, target) : this.callbackfn.call(this.thisObj, current, key, source, target);
@@ -1541,7 +1556,7 @@ var JsTypeCommander = (function (JsTypeCommander) {
             }
             return target;
         };
-        return limitingIterator;
+        return JSTCLimitingIterator;
     }());
     /**
      * Recursively maps an object or array.
@@ -1554,49 +1569,50 @@ var JsTypeCommander = (function (JsTypeCommander) {
      * if the current argument is an object (other than a string, number, symbol, boolean value or function) and you wish to recurse into its properties,
      * then callbackFn should return an object that is neither a string, number, symbol, boolean value or function.
      * @example The following examples effectively deep clone the source array to create an array of objects compatible with JSON.stringify.
-     * TypeScript:
-     *     import { JsTypeCommander } from 'JsTypeCommander';
-     *     let source: any[] = [{a: 1, b: 2}, 3, 4, ["Eins", "Svein", "Drei"]];
-     *     let deepClone = JsTypeCommander.mapInto(source, (current?: any, key?: number|string, source?: any[]|object, target?: any[]|object) => {
-     *         if (JsTypeCommander.notDefined(source) || JsTypeCommander.isArray(current))
-     *             return [];
-     *         return (JsTypeCommander.isObject(current)) ? { } : current;
-     *     });
-     *
-     *     interface IMyThis { count: number }
-     *     let myOptions: JsTypeCommander.MapIntoOptions = { thisObj: <IMyThis> { count: 0 } };
-     *     function myCallback(this: IMyThis, current?: any, key?: number|string, source?: any[]|object, target?: any[]|object) {
-     *         this.count++;
-     *         if (JsTypeCommander.notDefined(source) || JsTypeCommander.isArray(current))
-     *             return [];
-     *         return (JsTypeCommander.isObject(current)) ? { } : current;
-     *     }
-     *     deepClone = JsTypeCommander.mapInto(source, myCallback, myOptions);
-     *     // myOptions.thisObj.count === 9
-     *
      * JavaScript:
-     *     var JsTypeCommander = require("JsTypeCommander").JsTypeCommander;
      *     // interface RecursiveMapCallbackFn
      *     var source = [{ a: 1, b: 2 }, 3, 4, ["Eins", "Svein", "Drei"]];
      *     var myCallback = function(current, key, source, target) {
-     *         if (JsTypeCommander.notDefined(source) || JsTypeCommander.isArray(current))
+     *         if (x_44813_util.JsTypeCommander.notDefined(source) || x_44813_util.JsTypeCommander.isArray(current))
      *             return [];
-     *         return (JsTypeCommander.isObject(current)) ? { } : current;
+     *         return (x_44813_util.JsTypeCommander.isObject(current)) ? { } : current;
      *     };
-     *     var deepClone = JsTypeCommander.mapInto(source, myCallback);
+     *     var deepClone = x_44813_util.JsTypeCommander.mapInto(source, myCallback);
      *     var myOptions = { thisObj: { count: 0 } };
      *     myCallback = function(current, key, source, target) {
      *         this.count++;
-     *         if (JsTypeCommander.notDefined(source) || JsTypeCommander.isArray(current))
+     *         if (x_44813_util.JsTypeCommander.notDefined(source) || x_44813_util.JsTypeCommander.isArray(current))
      *             return [];
-     *         return (JsTypeCommander.isObject(current)) ? { } : current;
+     *         return (x_44813_util.JsTypeCommander.isObject(current)) ? { } : current;
      *     };
-     *     deepClone = JsTypeCommander.mapInto(source, myCallback, myOptions);
+     *     deepClone = x_44813_util.JsTypeCommander.mapInto(source, myCallback, myOptions);
+     *     // myOptions.thisObj.count === 9
+     * 
+     * TypeScript:
+     *     import { x_44813_util } from 'JsTypeCommander';
+     *     let source: any[] = [{a: 1, b: 2}, 3, 4, ["Eins", "Svein", "Drei"]];
+     *     let deepClone = x_44813_util.JsTypeCommander.mapInto(source, (current?: any, key?: number|string, source?: any[]|object, target?: any[]|object) => {
+     *         if (x_44813_util.JsTypeCommander.notDefined(source) || x_44813_util.JsTypeCommander.isArray(current))
+     *             return [];
+     *         return (x_44813_util.JsTypeCommander.isObject(current)) ? { } : current;
+     *     });
+     *
+     *     interface IMyThis { count: number }
+     *     let myOptions: x_44813_util.JsTypeCommander.MapIntoOptions = { thisObj: <IMyThis> { count: 0 } };
+     *     function myCallback(this: IMyThis, current?: any, key?: number|string, source?: any[]|object, target?: any[]|object) {
+     *         this.count++;
+     *         if (x_44813_util.JsTypeCommander.notDefined(source) || x_44813_util.JsTypeCommander.isArray(current))
+     *             return [];
+     *         return (x_44813_util.JsTypeCommander.isObject(current)) ? { } : current;
+     *     }
+     *     deepClone = x_44813_util.JsTypeCommander.mapInto(source, myCallback, myOptions);
      *     // myOptions.thisObj.count === 9
      */
     function mapInto(obj, callbackFn, options) {
-        var i = new limitingIterator(callbackFn, options);
+        var i = new JSTCLimitingIterator(callbackFn, options);
         return i.iterateInto(i.maxDepth, obj, undefined, undefined, undefined);
     }
     JsTypeCommander.mapInto = mapInto;
-})(JsTypeCommander || {});
+
+    return JsTypeCommander;
+})();

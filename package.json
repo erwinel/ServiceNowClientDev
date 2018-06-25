@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+hhttps://github.com/erwinel/ServiceNowClientDev.git"
+    "url": "git+https://github.com/erwinel/ServiceNowClientDev.git"
   },
   "author": "Leonard T. Erwine",
   "license": "Apache-2.0",

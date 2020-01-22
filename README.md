@@ -6,7 +6,7 @@ This contains files, scripts and documentation for customizing and maintaining S
 Dev Environment Setup
 ---------------------
 
-This solution was developed using Visual Studio Code.
+This solution was originally developed using Visual Studio Code and is being converted so it can be used in Visual Studio as well.
 
 The npm package manager (https://npmjs.com) and (VS Code extension eg2.vscode-npm-script) is required for building and package maintenance.
 

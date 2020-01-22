@@ -6,7 +6,7 @@ var gutil = require('gulp-util');
 var ts = require("gulp-typescript");
 var changed = require('gulp-changed');
 
-var tsUtilProject = ts.createProject("tsconfig.json");
+var tsUtilProject = ts.createProject("tsconfig-old.json");
 var tsTestProject = ts.createProject("tsconfig-test.json");
 
 gulp.task('cleanUtil', function() { return del([tsUtilProject.config.compilerOptions.outDir]); });

@@ -67,6 +67,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GlideModal.js" />
     <Content Include="lib\angular.js\angular-animate.js" />
     <Content Include="lib\angular.js\angular-animate.min.js" />
     <Content Include="lib\angular.js\angular-aria.js" />
@@ -900,8 +901,11 @@
     <TypeScriptCompile Include="servicenow-client.d.ts" />
     <TypeScriptCompile Include="SnGlobal\ScriptActions\validateUserProfileCompliance.ts" />
     <TypeScriptCompile Include="SnGlobal\UI Actions\exportToXml.ts" />
+    <TypeScriptCompile Include="SnGlobal\UI Scripts\USASOC_OnLogin.ts" />
     <TypeScriptCompile Include="SnGlobal\UiPolicies\cmn_business_unit.ts" />
     <TypeScriptCompile Include="util\JsTypeCommander.ts" />
+    <TypeScriptCompile Include="x_44813_usasoc_cst\new_user_session_check.ts" />
+    <TypeScriptCompile Include="x_44813_usasoc_cst\UsasocUserNotificationManager.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

@@ -2,6 +2,84 @@
 declare type StringQueryOperator = "=" | "!=" | "IN" | "NOT IN" | "STARTSWITH" | "ENDSWITH" | "CONTAINS" | "DOES NOT CONTAIN" | "INSTANCEOF";
 declare type NumberQueryOperator = "=" | "!=" | ">" | ">=" | "<" | "<=";
 declare type QueryOperator = StringQueryOperator | NumberQueryOperator;
+//declare type YEAR_FORMAT_TOKENS = 'y' | 'yy' | 'yyyy';
+//declare type MONTH_FORMAT_TOKENS = 'M' | 'MM' | 'MMM' | 'NNN' | 'MMMM';
+//declare type DAY_FORMAT_TOKENS = 'd' | 'dd' | 'E' | 'EE';
+//declare type WEEK_FORMAT_TOKENS = 'w' | 'ww';
+//declare type DAY_OF_WEEK_FORMAT_TOKEN = 'D';
+//declare type HOUR_FORMAT_TOKENS = 'h' | 'hh' | 'H' | 'HH' | 'k' | 'K' | 'KK';
+//declare type MINUTE_FORMAT_TOKENS = 'm' | 'mm';
+//declare type APMPM_FORMAT_TOKEN = 'a';
+//declare type GMT_FORMAT_TOKEN = 'z';
+//declare type SECOND_FORMAT_TOKENS = 's' | 'ss';
+//declare type DATE_FORMATS_GENERAL = 'yyyy-MM-dd' | 'y-M-d' | 'MMM d, y' | 'MMM d,y' | 'y-MMM-d' | 'd-MMM-y' | 'MMM d';
+//declare type DATE_FORMATS_MONTH_FIRST = 'M/d/y' | 'M-d-y' | 'M.d.y' | 'MMM-d' | 'M/d' | 'M-d';
+//declare type DATE_FORMATS_DATE_FIRST = 'd/M/y' | 'd-M-y' | 'd.M.y' | 'd-MMM' | 'd/M' | 'd-M';
+//declare type DATE_FORMATS_YEAR_FIRST = 'yyyyw.F' | 'yyw.F';
+//declare type DATE_FORMATS = DATE_FORMATS_GENERAL | DATE_FORMATS_MONTH_FIRST | DATE_FORMATS_DATE_FIRST | DATE_FORMATS_YEAR_FIRST;
+//declare type TIME_FORMATS = "HH:mm:ss" | "hh:mm:ss a" | "hh:mm:ss" | "h:mm:ss a" | "h:mm:ss" | "HH:mm:ss" | "hh:mm a" | "hh:mm" | "h:mm a" | "h:mm";
+//declare type DATETIME_FORMATS = "yyyy-MM-ddTHH:mm:ss" | "yyyy-MM-ddTHH:mm:ssz" | "M/d/y hh:mm:ss a" | "MM/dd/yyyy hh:mm:ss" | "M/d/y h:mm:ss a" | "M/d/y h:mm:ss" | "yyyy-MM-dd HH:mm:ss" | "MM/dd/yyyy hh:mm a" | "MM/dd/yyyy hh:mm" | "h:mm a" | "h:mm";
+
+//var MONTH_NAMES = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+//var DAY_NAMES = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+
+declare function addTopRenderEvent(cb: () => any);
+declare function isRenderEventRegistered(func: Function): boolean;
+declare function addRenderEvent(cb: () => any);
+declare function addLoadEvent(cb: () => any);
+declare function addLateLoadEvent(cb: () => any);
+declare function addAfterPageLoadedEvent(cb: () => any);
+declare function addUnloadEvent(cb: () => any);
+declare function isTopWindow(): boolean;
+declare function inFrame(): boolean;
+declare function getTopWindow(): Window;
+declare function getMainWindow(): Window;
+declare function getMainFormWindow(): Window;
+declare function getNavWindow(): Window;
+declare function jslog(msg, src, dateTime): void;
+declare function evalScript(s, evalGlobal): void;
+declare function htmlEscape(s: string): string;
+declare function htmlEscapeQuote(s: string): string;
+declare function htmlEscapeDoubleQuote(s: string): string;
+declare function trim(s: string): string;
+declare function hide(element: string | Element): void;
+declare function show(element: string | Element): void;
+declare function isHex(num: string): boolean;
+declare function isEmailValid(value: string): boolean;
+declare function isEmailValidWithReason(value: string): string;
+declare function formatCurrency(num: number | string): string;
+declare function formatNumber(num: number | string): string;
+declare function formatCents(amount: number | string): string;
+declare function formatDollar(amount: number | string): string;
+declare function padLeft(value: any, width: number, fill: string): string;
+declare function getDecimalSeparator(): string;
+declare function getGroupingSeparator(): string;
+declare function doubleDigitFormat(amount: number | string): string;
+declare function tripleDigitFormat(amount: number | string): string;
+declare function isNumber(test: any): boolean;
+declare function isAlphaNum(test: any): boolean;
+declare function isDigit(test: any): boolean;
+declare function isNumber(test: any): boolean;
+declare function replaceAll(str: string, from: string, to: string): string;
+declare function getHeight(el: Element): number;
+declare function getWidth(el: Element): number;
+declare function guid(l?: number): string;
+declare function getFormattedDateAndTime(date?: Date): string;
+declare function getFormattedDate(date?: Date): string;
+declare function getFormattedTime(date?: Date): string;
+declare function getBrowserWindowHeight(): number;
+declare function getBrowserWindowWidth(): number;
+declare function WindowSize(): { width: number; height: number; };
+declare function getScrollBarWidthPx(): number;
+declare function getDateFromFormat(val: any, format: string): Date;
+declare function parseDate(val: any): Date | null;
+declare function compareDates(date1: any, dateformat1: string, date2: any, dateformat2: string);
+declare function isDate(val: any, format: string): boolean;
+declare function getDurationString(ms: number): string;
+declare function getUserDateTime(): Date;
+declare function convertUtcTimeToUserTimeMs(utcTimeMs: number): number;
+declare function convertUserTimeToUtcTimeMs(utcTimeMs: number): number;
+declare function getActiveUser(): GlideUser;
 
 /**
  * Global glide variable.
@@ -857,4 +935,438 @@ declare abstract class spUtil {
     static recordWatch<T>($scope: ng.IScope, table: string, filter: string, callback: { (response: any): T; } & Function): Promise<T>;
     static refresh($scope: ng.IScope): any;
     static update($scope: ng.IScope): any;
+}
+
+declare type ModalWidth = "modal-md" | "modal-alert" | "modal-sm" | "modal-lg";
+
+/**
+ * GlideDialogWindow API - Provides methods for displaying a dialog in the current window and frame.
+ * @class GlideDialogWindow
+ */
+declare class GlideDialogWindow {
+    /**
+     * Creates an instance of the GlideDialogWindow class.
+     * @param {string} [id] The UI page to load into the modal.
+     * @param {boolean} [readOnly] When true, hides the close button.
+     * @param {number} [width] The width in pixels.
+     * @param {number} [height] The height in pixels.
+     * @memberof GlideModal
+     */
+    constructor(id?: string, readOnly?: boolean, width?: number, height?: number);
+
+    adjustBodySize(): void;
+
+    /**
+     * Closes the dialog window.
+     * @memberof GlideDialogWindow
+     */
+    destroy(): void;
+
+    /**
+     * Get a GlideDialogWindow object by ID.
+     * @param {string} [id] The element id of the GlideDialogWindow object or null to get the current GlideDialogWindow object.
+     * @returns {GlideDialogWindow} The GlideDialogWindow.
+     * @memberof GlideDialogWindow
+     * @static
+     */
+    static get(id?: string): GlideDialogWindow;
+
+    /**
+     * Returns the value of the specified property.
+     * @param {string} name The property name
+     * @returns {*} The specified property's value
+     * @memberof GlideDialogWindow
+     */
+    getPreference(name: string): any;
+
+    /**
+     *
+     * @param {string} evtName
+     * @param {Function} callbackFn
+     * @memberof GlideDialogWindow
+     * @description Event names include 'bodyrendered', 'closeconfirm', and 'beforeclose'.
+     * @example
+     * var gm: GlideDialogWindow = new GlideDialogWindow('my_dialog');
+     * gm.on('closeconfirm', function (gm: GlideModal): boolean {
+     *      return canCancel == true;
+     * });
+     */
+    on(evtName: string, callbackFn: Function): void;
+
+    removeCloseDecoration(): void;
+
+    /**
+     * Renders the UI page in the modal.
+     * @memberof GlideDialogWindow
+     */
+    render(): void;
+
+    /**
+     * Sets the body of the dialog.
+     * @param {string} html The dialog body.
+     * @param {boolean} [noEvaluate] If true, scripts won't be evaluated.
+     * @memberof GlideDialogWindow
+     */
+    setBody(html: string, noEvaluate?: boolean): void;
+
+    /**
+     * Set a property that is read by the loaded UI page.
+     * @param {string} name The property name
+     * @param {*} value The property value
+     * @memberof GlideDialogWindow
+     */
+    setPreference(name: string, value: any): void;
+
+    /**
+     * Set the width in pixels or predefined sizes.
+     * @param {number} [width] The width of the dialog window.
+     * @param {number} [height] The height of the dialog window.
+     * @memberof GlideDialogWindow
+     */
+    setSize(width?: number, height?: number): void;
+
+    /**
+     * Sets the title of the modal.
+     * @param {string} title The title to be displayed
+     * @memberof GlideDialogWindow
+     */
+    setTitle(title: string): void;
+
+}
+
+/**
+ * GlideModalV3 API - Provides methods for displaying a content overlay.
+ * @class GlideModal
+ * @description This is a fully-featured replacement for GlideWindow and GlideDialogWindow.
+ */
+declare class GlideModal {
+    /**
+     * Creates an instance of the GlideModalV3 class.
+     * @param {string} [id] The UI page to load into the modal.
+     * @param {boolean} [readOnly] When true, hides the close button.
+     * @param {number} [width] The width in pixels.
+     * @param {number} [height] The height in pixels.
+     * @memberof GlideModal
+     */
+    constructor(id?: string, readOnly?: boolean, width?: number, height?: number);
+
+    /**
+     * 
+     * @memberof GlideModal
+     */
+    applyAutoFocus();
+
+    /**
+     * Closes the dialog window.
+     * @memberof GlideModal
+     */
+    destroy(): void;
+
+    /**
+     * 
+     * @param {string} evtName
+     * @param {...any[]} args
+     * @returns {boolean}
+     * @memberof GlideModal
+     */
+    fireEvent(evtName: string, ...args: any[]): boolean;
+
+    /**
+     * Get a GlideModal object by ID.
+     * @param {string} [id] The element id of the GlideModal object or null to get the current GlideModel object.
+     * @returns {GlideModal} The GlideModal
+     * @memberof GlideModal
+     */
+    get(id?: string): GlideModal;
+
+    /**
+     * 
+     * @returns {string}
+     * @memberof GlideModal
+     */
+    getDescribingText(): string;
+
+    /**
+     * 
+     * @returns {Element}
+     * @memberof GlideModal
+     */
+    getDescribingXML(): Element;
+
+    /**
+     * 
+     * @returns {string}
+     * @memberof GlideModal
+     */
+    getID(): string;
+
+    /**
+     * Returns the value of the specified property.
+     * @param {string} name The property name
+     * @returns {*} The specified property's value
+     * @memberof GlideModal
+     */
+    getPreference(name: string): any;
+
+    /**
+     * 
+     * @returns {{ [key: string]: *; }}
+     * @memberof GlideModal
+     */
+    getPreferences(): { [key: string]: any; };
+
+    /**
+     * Finds the parent modal window for a DOM element.
+     * @param {Element} domElement The child DOM elelement.
+     * @returns {GlideModal | null} The modal window or null if the window was not found.
+     * @memberof GlideModal
+     */
+    locate(domElement: Element): GlideModal | null;
+
+    /**
+     * 
+     * @param {{ (d: GlideModal); }} callback
+     * @memberof GlideModal
+     */
+    maximizeHeight(callback: { (d: GlideModal); }): void;
+
+    /**
+     *
+     * @param {string} evtName
+     * @param {Function} callbackFn
+     * @memberof GlideModal
+     * @description Event names include 'bodyrendered', 'closeconfirm', and 'beforeclose'.
+     * @example
+     * var gm: GlideModal = new GlideModal('x_44813_usasoc_cst_profile_incomplete_warning');
+     * gm.on('closeconfirm', function (gm: GlideModal): boolean {
+     *      return canCancel == true;
+     * });
+     */
+    on(evtName: string, callbackFn: Function): void;
+
+    /**
+     * Renders the UI page in the modal.
+     * @memberof GlideModal
+     */
+    render(): void;
+
+    /**
+     * 
+     * @param {string} url
+     * @param {Function} onloadCallback
+     * @memberof GlideModal
+     */
+    renderIframe(url: string, onloadCallback: Function): void;
+
+    /**
+     * Display a modal with the specified HTML content.
+     * @param {(string | object)} html The HTML content to be shown in the modal.
+     * @memberof GlideModal
+     */
+    renderWithContent(html: string | object): void;
+
+    /**
+     * 
+     * @param {boolean} isAutoFullHeight
+     * @memberof GlideModal
+     */
+    setAutoFullHeight(isAutoFullHeight: boolean): void;
+
+    /**
+     * 
+     * @param {boolean} makeStatic
+     * @memberof GlideModal
+     */
+    setBackdropStatic(makeStatic: boolean): void;
+
+    /**
+     * Sets the body of the dialog.
+     * @param {string} html The dialog body.
+     * @param {boolean} [noEvaluate] If true, scripts won't be evaluated.
+     * @memberof GlideModal
+     */
+    setBody(html: string, noEvaluate?: boolean): void;
+
+    /**
+     *
+     * @param {string} dialogName
+     * @memberof GlideModal
+     */
+    setDialog(dialogName: string): void;
+
+    /**
+     * 
+     * @param {string} body
+     * @memberof GlideModal
+     */
+    setEscapedBody(body: string): void;
+
+    /**
+     *
+     * @param {Element} el
+     * @memberof GlideModal
+     */
+    setFocus(el: Element): void;
+
+    /**
+     *
+     * @param {boolean} nolog
+     * @memberof GlideModal
+     */
+    setNologValue(nolog: boolean): void;
+
+    /**
+     * Set a property that is read by the loaded UI page.
+     * @param {string} name The property name
+     * @param {*} value The property value
+     * @memberof GlideModal
+     */
+    setPreference(name: string, value: any): void;
+
+    /**
+     * Set the properties and reload the modal.
+     * @param {{ [key: string]: string; }} properties Name-value pairs to be set.
+     * @memberof GlideModal
+     */
+    setPreferenceAndReload(properties: { [key: string]: any; }): void;
+
+    /**
+     *
+     * @param {XMLDocument} xml
+     * @memberof GlideModal
+     */
+    setPreferencesFromBody(xml: XMLDocument): void;
+
+    /**
+     * Set the width in pixels or predefined sizes.
+     * @param {(number | ModalWidth)} width The width in pixels or predefined width name.
+     * @memberof GlideModal
+     */
+    setSize(width: number | ModalWidth): void;
+
+    /**
+     * Sets the title of the modal.
+     * @param {string} title The title to be displayed
+     * @memberof GlideModal
+     */
+    setTitle(title: string): void;
+
+    /**
+     * Set the width in pixels or predefined sizes.
+     * @param {(number | ModalWidth)} width The width in pixels or predefined width name.
+     * @memberof GlideModal
+     */
+    setWidth(width: number | ModalWidth): void;
+
+    /**
+     * Change the view and reload the modal.
+     * @param {string} newView The view to use.
+     * @memberof GlideModal
+     */
+    switchView(newView: string): void;
+
+    /**
+     * Updates the modal element title.
+     * @memberof GlideModal
+     */
+    updateTitle(): void;
+
+    /**
+     * Updates the modal element size.
+     * @memberof GlideModal
+     */
+    updateSize(): void;
+}
+
+/**
+ * Callback used by {@link GlideModalForm#setCompletionCallback}.
+ * @callback GlideModalForm~onCompletionCallback
+ * @param {string} action_verb The name of the UI action executed. Examples are sysverb_insert (Submit button), sysverb_cancel, sysverb_save (Save button).
+ * @param {string} sys_id The sys_id of the affected record.
+ * @param {string} table The name of the table containing the record.
+ * @param {string} displayValue The affected rcord display value.
+ */
+declare interface GlideModalFormCompletionCallback {
+    (action_verb: string, sys_id: string, table: string, displayValue: string): void;
+}
+
+/**
+ * Displays a form in a GlideModal.
+ * @class GlideModalForm
+ * @description General usage of the GlideModalForm class involves creating the object, setting any preferences, and then rendering the GlideModalForm.
+ * The GlideFormModal is set to fill the height of the document window.
+ */
+declare class GlideModalForm {
+    /**
+     * Creates an instance of the GlideModalForm class.
+     * @param {string} title The form title.
+     * @param {string} [tableName] The table being shown.
+     * @param {GlideModalFormCompletionCallback} [onCompletionCallback] The function to call after the form has been submitted and processed on the server.
+     * @param {boolean} [readOnly]
+     * @memberof GlideModalForm
+     */
+    constructor(title: string, tableName?: string, onCompletionCallback?: GlideModalFormCompletionCallback, readOnly?: boolean);
+
+    /**
+     *
+     * @param {boolean} bool
+     * @memberof GlideModalForm
+     */
+    setFooter(bool: boolean): void;
+
+    /**
+     * Sets the object's sys_id preference.
+     * @param {string} id The id preference. One of the query parameters passed to the form.
+     * @memberof GlideModalForm
+     */
+    setSysID(id: string): void;
+
+    /**
+     * 
+     * @param {string} template
+     * @memberof GlideModalForm
+     */
+    setTemplate(template: string): void;
+
+    /**
+     * Sets the function to be called when the form has been successfully submitted and processed by the server.
+     * @param {GlideModalFormCompletionCallback} func The callback function to be called when the form has been successfully processed.
+     * @memberof GlideModalForm
+     */
+    setCompletionCallback(func: GlideModalFormCompletionCallback): void;
+
+    /**
+     * Sets the function to be called after the form has been loaded.
+     * @param {{ (obj: GlideModalForm): void; }} func The function to be called after the form has been loaded.
+     * @memberof GlideModalForm
+     */
+    setOnloadCallback(func: { (obj: GlideModalForm): void; }): void;
+
+    /**
+     * Shows the form.
+     * @memberof GlideModalForm
+     */
+    render(): void;
+
+    /**
+     * Change the view and reload the modal.
+     * @param {string} newView The view to use.
+     * @memberof GlideModal
+     */
+    switchView(newView: string): void;
+
+    /**
+     * Set the properties and reload the modal.
+     * @param {{ [key: string]: string; }} properties Name-value pairs to be set.
+     * @memberof GlideModal
+     */
+    setPreferenceAndReload(properties: { [key: string]: string; }): void;
+
+    /**
+     * Sets the specified parameter to the specified value.
+     * @param {string} name The parameter name.
+     * @param {string} value The parameter value.
+     * @memberof GlideModalForm
+     */
+    addParm(name: string, value: string): void;
 }
